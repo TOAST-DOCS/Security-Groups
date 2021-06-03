@@ -1,1 +1,2 @@
-## Security Groups
+## Network > Security Groups > Console Guide
+
