@@ -24,4 +24,4 @@ Create a policy to apply to the security group. A number of security policies ca
 ### Applying security groups
 If a security group is selected when creating an instance, the security group is applied. In the instance, many security groups can be set. The policies of all set security groups are applied to the instance.
 For example, if the security group 'CONN' has policies 'Ingress TCP PORT 22', 'Ingress TCP PORT 23', and the security group 'WEB' has policies such as 'Ingress TCP PORT 80', 'Ingress TCP PORT 8080', setting two security groups ('CONN', 'WEB') to a single instance will apply all four policies, allowing you to use all of the services.
-The security groups that were applied to the instance can be changed in the Instance Management menu. The identical security group can be applied to a number of instances.
+The security groups that were applied to the instance can be changed in the Instance Management menu. The identical security group can be applied to a number of instances. 
