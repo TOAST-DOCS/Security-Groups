@@ -1,49 +1,49 @@
-## Network > Security Groups > API v2 Guide 
+## Network > Security Groups > API v2 Guide
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+Using the API requires API endpoint, token, etc. Please refer to [Getting ready to use API](/Compute/Compute/ko/identity-api/) to prepare information required for using the API.
 
-보안 그룹 API는 `network` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
+Security Group API uses the `network` type endpoint. To see the accurate endpoint, refer to `serviceCatalog` of the token issuance response.
 
-| 타입 | 리전 | 엔드포인트 |
+| Type | Region | Endpoint |
 |---|---|---|
-| network | 한국(판교) 리전<br>한국(평촌) 리전<br>일본 리전 | https://kr1-api-network.infrastructure.cloud.toast.com<br>https://kr2-api-network.infrastructure.cloud.toast.com<br>https://jp1-api-network.infrastructure.cloud.toast.com |
+| network | Korea(Pangyo) Region<br>Korea(Pyeongchon) Region<br>Japan region | https://kr1-api-network.infrastructure.cloud.toast.com<br>https://kr2-api-network.infrastructure.cloud.toast.com<br>https://jp1-api-network.infrastructure.cloud.toast.com |
 
-API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
+API response may show the fields not specified by the guide. These fields are internally used by NHN Cloud, and not used because they are subject to change without prior notice.
 
-## Security Group
-### List Security Groups 
+
+## Security group
+### See the list of security groups
 ```
 GET /v2.0/security-groups
 X-Auth-Token: {tokenId}
 ```
 
 #### Request
-This API does not require a request body. 
+This API does not require a request body.
 
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
-| id | Query | UUID | - | Security group ID to query |
-| tenant_id | Query | String | - | Tenant ID of security group to query |
-| name | Query | String | - | Name of security group to query |
-| sort_dir | Query | Enum | - | Sorting direction of security group to query <br>Sort by the field specified by`sort_key`<br>Either **asc** or **desc** |
-| sort_key | Query | String | - | Sorting key of security group to query <br>Sort in the direction as specified by`sort_dir` |
-| fields | Query | String | - | Field name of security group to query <br>e.g.) `fields=id&fields=name` |
+| id | Query | UUID | - | Security group ID to view |
+| tenant_id | Query | String | - | Tenant ID of the security group to view |
+| name | Query | String | - | Security group name to view |
+| sort_dir | Query | Enum | - | Sort direction of the security group to view<br>`Sorted by the field specified by sort_key`<br>**asc** or **desc** |
+| sort_key | Query | String | - | Sort key of the security group to view<br>`Sorted by the direction specified by sort_dir` |
+| fields | Query | String | - | Field name of the security group to view<br>e.g.) `fields=id&fields=name` |
 
 #### Response
 
 | Name | Type | Format | Description |
 |---|---|---|---|
-| security_groups | Body | Array | Object of security group list |
+| security_groups | Body | Array | List of security groups object |
 | security_groups.tenant_id | Body | String | Tenant ID |
-| security_groups.description | Body | String | Description of security group |
+| security_groups.description | Body | String | Security group description |
 | security_groups.id | Body | UUID | Security group ID |
 | security_groups.security_group_rules | Body | Array | List of security group rules |
 | security_groups.name | Body | String | Security group name |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -117,24 +117,24 @@ This API does not require a request body.
 
 ---
 
-### Get Security Group
+### See the security groups
 ```
 GET /v2.0/security-groups/{securityGroupId}
 X-Auth-Token: {tokenId}
 ```
 
 #### Request
-This API does not require a request body. 
+This API does not require a request body.
 
-| Name | Type | Format | Required | Description |
+| Name | Type | Example | Required | Description |
 |---|---|---|---|---|
-| securityGroupId | Query | UUID | O | ID of security group to query |
+| securityGroupId | Query | UUID | O | Security group ID to view |
 | tokenId | Header | String | O | Token ID |
-| fields | Query | String | - | Field name of security group to query <br>Return specified fields only to response <br>e.g.) `fields=id&fields=name` |
+| fields | Query | String | - | Field name of the security group to view<br>Only the specified fields are returned in the response<br>e.g.) `fields=id&fields=name` |
 
 #### Response
 
-| Name | Type | Format | Description |
+| Name | Type | Example | Description |
 |---|---|---|---|
 | security_group | Body | Object | Security group object |
 | security_group.tenant_id | Body | String | Tenant ID |
@@ -145,7 +145,6 @@ This API does not require a request body.
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -217,9 +216,9 @@ This API does not require a request body.
 
 ---
 
-### Create Security Group
+### Creating a security group
 
-Create a new security group: new security group, by default, includes the egress security group rules. 
+Create a new security group. Newly created security groups include the egress security group rules by default.
 
 ```
 POST /v2.0/security-groups
@@ -231,13 +230,12 @@ X-Auth-Token: {tokenId}
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
-| security_group | Body | Object | O | Object requesting of creating security group |
+| security_group | Body | Object | O | Object requesting creation of security group |
 | description | Body | String | - | Security group description |
 | name | Body | String | - | Security group name |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -264,7 +262,6 @@ X-Auth-Token: {tokenId}
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -310,8 +307,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### Modify Security Group
-Modify an existing security group. 
+### Modifying a security group
+Modify an existing security group
 ```
 PUT /v2.0/security-groups/{securityGroupId}
 X-Auth-Token: {tokenId}
@@ -323,13 +320,12 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
 | securityGroupId | URL | UUID | O | Security group ID |
-| security_group | Body | Object | O | Object requesting of modifying security group |
+| security_group | Body | Object | O | Object requesting modification of security group |
 | description | Body | String | - | Security group description |
 | name | Body | String | - | Security group name |
 
-<details><summary>Example</summary>
+<details><summary>예시</summary>
 <p>
-
 
 ```json
 {
@@ -356,7 +352,6 @@ X-Auth-Token: {tokenId}
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -402,15 +397,15 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### Delete Security Group
-Delete specified security group. 
+### Deleting a security group
+Delete a specified security group
 ```
 DELETE /v2.0/security-groups/{securityGroupId}
 X-Auth-Token: {tokenId}
 ```
 
 #### Request
-This API does not require a request body. 
+This API does not require a request body.
 
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
@@ -418,58 +413,57 @@ This API does not require a request body.
 | tokenId | Header | String | O | Token ID |
 
 #### Response
-This API does not return a response body. 
+This API does not return a response body.
 
 ---
 
-## Security Rule
-### List Security Rules 
+## Security rules
+### See the list of security rules
 ```
 GET /v2.0/security-group-rules
 X-Auth-Token: {tokenId}
 ```
 
 #### Request
-This API does not require a request body. 
+This API does not require a request body.
 
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
-| id | Query | UUID | - | Security rule ID to query |
-| remote_group_id | Query | UUID | - | Remote security group ID of security rule to query |
-| protocol | Query | String | - | Protocol of security rule to query |
-| direction | Query | Enum | - | Packet direction to which security rule to query is applied<br>**ingress** or **egress** |
-| ethertype | Query | Enum | - | The `Ethertype` value of network traffic of security rule to query<br>**IPv4** or **IPv6** |
-| port_range_max | Query | Integer | - | Maximum value within port range of security rule to query |
-| port_range_min | Query | Integer | - | Minimum value within port range of security rule to query |
-| security_group_id | Query | UUID | - | Security group ID including security rule to query |
-| tenant_id | Query | String | - | Tenant ID of security rule to query |
-| remote_ip_prefix | Query | String | - | Prefix of destination IP of security rule to query |
-| description | Query | String | - | Description of security rule to query |
-| sort_dir | Query | Enum | - | Sorting direction of security rule to query <br>Sort by the field specified by `sort_key`<br>Either **asc** or **desc** |
-| sort_key | Query | String | - | Sorting key of security rule to query <br>Sort in the direction specified by `sort_dir` |
-| fields | Query | String | - | Field name of security rule to query<br>e.g.) `fields=id&fields=name` |
+| id | Query | UUID | - | Security rule ID to view |
+| remote_group_id | Query | UUID | - | Remote security group ID of the security rule to view |
+| protocol | Query | String | - | Protocol of the security rule to view |
+| direction | Query | Enum | - | Direction of packet to which the security rule to view is applied<br>**ingress** or **egress** |
+| ethertype | Query | Enum | - | Network traffic of the security rule to view `Ethertype` value<br>**IPv4** or **IPv6** |
+| port_range_max | Query | Integer | - | Maximum port range of the security rule to view |
+| port_range_min | Query | Integer | - | Minimum port range of the security rule to view |
+| security_group_id | Query | UUID | - | Security group ID containing the security rule to view |
+| tenant_id | Query | String | - | Tenant ID of the security rule to view |
+| remote_ip_prefix | Query | String | - | Destination IP prefix of the security rule to view |
+| description | Query | String | - | Description of the security rule to view |
+| sort_dir | Query | Enum | - | Sort direction of the security rule to view<br>`Sorted by the field specified by sort_key`<br>**asc** or **desc** |
+| sort_key | Query | String | - | Sort key of the security rule to view<br>`Sorted in the direction specified by sort_dir` |
+| fields | Query | String | - | Field name of the security rule to view<br>e.g.) `fields=id&fields=name` |
 
 #### Response
 
 | Name | Type | Format | Description |
 |---|---|---|---|
 | security_group_rules | Body | Array | List of security rule objects |
-| security_group_rules.direction | Body | Enum | Packet direction to which security rule is applied <br>**ingress** or **egress** |
-| security_group_rules.ethertype | Body | Enum | The `Ethertype` value of network traffic of security rule <br>**IPv4** or **IPv6** |
-| security_group_rules.protocol | Body | String | Protocol name of security rule |
+| security_group_rules.direction | Body | Enum | Direction of packet to which the security rule is applied<br>**ingress** or **egress** |
+| security_group_rules.ethertype | Body | Enum | Network traffic of the security rule `Ethertype` value<br>**IPv4** or **IPv6** |
+| security_group_rules.protocol | Body | String | Protocol name of the security rule |
 | security_group_rules.description | Body | String | Security rule description |
-| security_group_rules.port_range_max | Body | Integer | Maximum value within port range of security rule |
-| security_group_rules.port_range_min | Body | Integer | Minimum value within port range of security rule |
-| security_group_rules.remote_group_id | Body | UUID | Remote security group ID of security rule |
-| security_group_rules.remote_ip_prefix | Body | Enum | Prefix of destination IP of security rule |
-| security_group_rules.security_group_id | Body | UUID | Security group ID including security rule |
+| security_group_rules.port_range_max | Body | Integer | Maximum port range of the security rule |
+| security_group_rules.port_range_min | Body | Integer | Minimum port range of the security rule |
+| security_group_rules.remote_group_id | Body | UUID | Remote security group ID of the security rule |
+| security_group_rules.remote_ip_prefix | Body | Enum | Destination IP prefix of the security rule |
+| security_group_rules.security_group_id | Body | UUID | Security group ID containing the security rule |
 | security_group_rules.tenant_id | Body | String | Tenant ID |
 | security_group_rules.id | Body | UUID | Security rule ID |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -496,41 +490,40 @@ This API does not require a request body.
 
 ---
 
-### Get Security Rule
+### See the security rules
 ```
 GET /v2.0/security-group-rules/{securityGroupRuleId}
 X-Auth-Token: {tokenId}
 ```
 
 #### Request
-This API does not require a request body. 
+This API does not require a request body.
 
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | securityGroupRuleId | URL | UUID | O | Security rule ID |
 | tokenId | Header | String | O | Token ID |
-| fields | Query | String | - | Field name of security rule to query <br>e.g.) `fields=id&fields=name` |
+| fields | Query | String | - | Field name of the security rule to view<br>e.g.) `fields=id&fields=name` |
 
 #### Response
 
 | Name | Type | Format | Description |
 |---|---|---|---|
 | security_group_rule | Body | Object | Security rule object |
-| security_group_rule.direction | Body | Enum | Packet direction to which security rule is applied<br>**ingress** or **egress** |
-| security_group_rule.ethertype | Body | Enum | The  `Ethertype` value of network traffic of security rule <br>**IPv4** or **IPv6** |
-| security_group_rule.protocol | Body | String | Protocol name of security rule |
+| security_group_rule.direction | Body | Enum | Direction of packet to which the security rule is applied<br>**ingress** or **egress** |
+| security_group_rule.ethertype | Body | Enum | Network traffic of the security rule `Ethertype` value<br>**IPv4** or **IPv6** |
+| security_group_rule.protocol | Body | String | Protocol name of the security rule |
 | security_group_rule.description | Body | String | Security rule description |
-| security_group_rule.port_range_max | Body | Integer | Maximum value within port range of security rule to query |
-| security_group_rule.port_range_min | Body | Integer | Minimum value within port range of security rule to query |
-| security_group_rule.remote_group_id | Body | UUID | Remote security group ID of security rule |
-| security_group_rule.remote_ip_prefix | Body | Enum | Prefix of destination IP of security rule |
-| security_group_rule.security_group_id | Body | UUID | Security group ID including security rule |
+| security_group_rule.port_range_max | Body | Integer | Maximum port range of the security rule to view |
+| security_group_rule.port_range_min | Body | Integer | Minimum port range of the security rule to view |
+| security_group_rule.remote_group_id | Body | UUID | Remote security group ID of the security rule |
+| security_group_rule.remote_ip_prefix | Body | Enum | Destination IP prefix of the security rule |
+| security_group_rule.security_group_id | Body | UUID | Security group ID containing the security rule |
 | security_group_rule.tenant_id | Body | String | Tenant ID |
 | security_group_rule.id | Body | UUID | Security rule ID |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -555,34 +548,33 @@ This API does not require a request body.
 
 ---
 
-### Create Security Rule
+### Creating a security rule
 
-Create a new security group rule. It is available to create security rules only for IPv4. 
+Create a new security group rule. You can create a security rule for IPv4 only.
 
 ```
 POST /v2.0/security-group-rules
 X-Auth-Token: {tokenId}
 ```
 
-#### Request	
+#### Request
 
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
 | tokenId | Header | String | O | Token ID |
-| security_group_rule | Body | Object | O | Object requesting of creating security rules |
-| security_group_rule.remote_group_id | Body | UUID | - | Remote security group ID of security rule |
-| security_group_rule.direction | Body | Enum | O | Packet direction to which security rule is applied<br>**ingress**, **egress** |
-| security_group_rule.ethertype | Body | Enum | - | If left blank, specified with`IPv4`. |
-| security_group_rule.protocol | Body | String | - | Protocol name of security rule: to be applied to all protocols, if it is omitted. |
-| security_group_rule.port_range_max | Body | Integer | - | Maximum value within port range of security rule |
-| security_group_rule.port_range_min | Body | Integer | - | Minimum value within port range of security rule |
-| security_group_rule.security_group_id | Body | UUID | O | ID of security group including security rules |
-| security_group_rule.remote_ip_prefix | Body | Enum | - | Prefix of destination IP of security rule |
+| security_group_rule | Body | Object | O | Object requesting creation of security group |
+| security_group_rule.remote_group_id | Body | UUID | - | Remote security group ID of the security rule |
+| security_group_rule.direction | Body | Enum | O | Direction of packet to which the security rule is applied<br>**ingress**, **egress** |
+| security_group_rule.ethertype | Body | Enum | - | Set to `IPv4`. Specified as `IPv4` if omitted |
+| security_group_rule.protocol | Body | String | - | Protocol name of the security rule. Applied to all protocols if omitted. |
+| security_group_rule.port_range_max | Body | Integer | - | Maximum port range of the security rule |
+| security_group_rule.port_range_min | Body | Integer | - | Minimum port range of the security rule |
+| security_group_rule.security_group_id | Body | UUID | O | Security group ID containing the security rule |
+| security_group_rule.remote_ip_prefix | Body | Enum | - | Destination IP prefix of the security rule |
 | security_group_rule.description | Body | String | - | Security rule description |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -601,26 +593,25 @@ X-Auth-Token: {tokenId}
 </p>
 </details>
 
-#### Response	
+#### Response
 
 | Name | Type | Format | Description |
 |---|---|---|---|
 | security_group_rule | Body | Object | Security rule object |
-| security_group_rule.direction | Body | Enum | Packet direction to which security rules are applied <br>**ingress** or **egress** |
-| security_group_rule.ethertype | Body | Enum | The `Ethertype` of network traffic of security rules <br>**IPv4** or **IPv6** |
-| security_group_rule.protocol | Body | String | Protocol name of security rule |
+| security_group_rule.direction | Body | Enum | Direction of packet to which the security rule is applied<br>**ingress** or **egress** |
+| security_group_rule.ethertype | Body | Enum | Network traffic of the security rule `Ethertype` value<br>**IPv4** or **IPv6** |
+| security_group_rule.protocol | Body | String | Protocol name of the security rule |
 | security_group_rule.description | Body | String | Security rule description |
-| security_group_rule.port_range_max | Body | Integer | Maximum value within port range of security rule to query |
-| security_group_rule.port_range_min | Body | Integer | Minimum value within port range of security rule to query |
-| security_group_rule.remote_group_id | Body | UUID | ID of remote security group of security rule |
-| security_group_rule.remote_ip_prefix | Body | Enum | Prefix of destination IP of security rule |
-| security_group_rule.security_group_id | Body | UUID | ID of security group including security rule |
+| security_group_rule.port_range_max | Body | Integer | Maximum port range of the security rule to view |
+| security_group_rule.port_range_min | Body | Integer | Minimum port range of the security rule to view |
+| security_group_rule.remote_group_id | Body | UUID | Remote security group ID of the security rule |
+| security_group_rule.remote_ip_prefix | Body | Enum | Destination IP prefix of the security rule |
+| security_group_rule.security_group_id | Body | UUID | Security group ID containing the security rule |
 | security_group_rule.tenant_id | Body | String | Tenant ID |
 | security_group_rule.id | Body | UUID | Security rule ID |
 
 <details><summary>Example</summary>
 <p>
-
 
 ```json
 {
@@ -645,8 +636,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### Delete Security Rule
-Delete a specified security rule.
+### Deleting a security rule
+Delete a specified security rule
 ```
 DELETE /v2.0/security-group-rules/{securityGroupRuleId}
 X-Auth-Token: {tokenId}
@@ -657,8 +648,8 @@ This API does not require a request body.
 
 | Name | Type | Format | Required | Description |
 |---|---|---|---|---|
-| securityGroupRuleId | URL | UUID | O | ID of security rules |
+| securityGroupRuleId | URL | UUID | O | Security rule ID |
 | tokenId | Header | String | O | Token ID |
 
 #### Response
-This API does not return a request body. 
+This API does not return a response body.
