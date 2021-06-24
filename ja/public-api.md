@@ -1,14 +1,14 @@
 ## Network > Security Groups > API v2ガイド
 
-API를 사용하려면 API 엔드포인트와 토큰 등이 필요합니다. [API 사용 준비](/Compute/Compute/ko/identity-api/)를 참고하여 API 사용에 필요한 정보를 준비합니다.
+APIを使用するにはAPIエンドポイントとトークンなどが必要です。 [API使用準備](/Compute/Compute/ko/identity-api/)を参考にしてAPIを使用するために必要な情報を準備します。
 
-보안 그룹 API는 `network` 타입 엔드포인트를 이용합니다. 정확한 엔드포인트는 토큰 발급 응답의 `serviceCatalog`를 참조합니다.
+セキュリティグループAPIは`network`タイプエンドポイントを利用します。正確なエンドポイントはトークン発行レスポンスの`serviceCatalog`を参照します。
 
-| 타입 | 리전 | 엔드포인트 |
+| タイプ | リージョン | エンドポイント |
 |---|---|---|
-| network | 한국(판교) 리전<br>한국(평촌) 리전<br>일본 리전 | https://kr1-api-network.infrastructure.cloud.toast.com<br>https://kr2-api-network.infrastructure.cloud.toast.com<br>https://jp1-api-network.infrastructure.cloud.toast.com |
+| network | 韓国(パンギョ)リージョン<br>韓国(坪村)リージョン<br>日本リージョン | https://kr1-api-network.infrastructure.cloud.toast.com<br>https://kr2-api-network.infrastructure.cloud.toast.com<br>https://jp1-api-network.infrastructure.cloud.toast.com |
 
-API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
+APIレスポンスにガイドに明示されていないフィールドが現れることがあります。これらのフィールドはNHN Cloud内部用途で使用し、事前の告知なしに変更される場合があるため使用しません。
 
 
 ## セキュリティグループ
@@ -26,9 +26,9 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | トークンID |
 | id | Query | UUID | - | 照会するセキュリティグループID |
 | tenant_id | Query | String | - | 照会するセキュリティグループのテナントID |
-| name | Query | String | - | 照会するセキュリティグループの名前 |
+| name | Query | String | - | 照会するセキュリティグループ名 |
 | sort_dir | Query | Enum | - | 照会するセキュリティグループのソート方向<br>`sort_key`で指定したフィールドを基準にソート<br>**asc**、**desc**のいずれか |
-| sort_key | Query | String | - | 照会するセキュリティグループのソートキー<br>`sort_dir`で指定した方向通りにソート |
+| sort_key | Query | String | - | 照会するセキュリティグループのソートキー<br>`sort_dir`で指定した方向でソート |
 | fields | Query | String | - | 照会するセキュリティグループのフィールド名<br>例) `fields=id&fields=name` |
 
 #### レスポンス
@@ -130,7 +130,7 @@ X-Auth-Token: {tokenId}
 |---|---|---|---|---|
 | securityGroupId | Query | UUID | O | 照会するセキュリティグループID |
 | tokenId | Header | String | O | トークンID |
-| fields | Query | String | - | 照会するセキュリティグループのフィールド名<br>指定したフィールドのみレスポンスに返す<br>例) `fields=id&fields=name` |
+| fields | Query | String | - | 照会するセキュリティグループのフィールド名<br>指定したフィールドのみ返す<br>例) `fields=id&fields=name` |
 
 #### レスポンス
 
@@ -216,9 +216,9 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### セキュリティグループを作成する
+### セキュリティグループ作成
 
-新しいセキュリティグループを作成します。新たに作成されたセキュリティグループは、出る方向のセキュリティグループルールを基本的に含んでいます。
+新しいセキュリティグループを作成します。新たに作成されたセキュリティグループは出る方向のセキュリティグループルールを基本的に含みます。
 
 ```
 POST /v2.0/security-groups
@@ -307,8 +307,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### セキュリティグループを修正する
-既存セキュリティグループを修正します。
+### セキュリティグループ修正
+セキュリティグループを修正します。
 ```
 PUT /v2.0/security-groups/{securityGroupId}
 X-Auth-Token: {tokenId}
@@ -397,7 +397,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### セキュリティグループを削除する
+### セキュリティグループ削除
 指定したセキュリティグループを削除します。
 ```
 DELETE /v2.0/security-groups/{securityGroupId}
@@ -433,16 +433,16 @@ X-Auth-Token: {tokenId}
 | id | Query | UUID | - | 照会するセキュリティルールID |
 | remote_group_id | Query | UUID | - | 照会するセキュリティルールの遠隔セキュリティグループID |
 | protocol | Query | String | - | 照会するセキュリティルールのプロトコル |
-| direction | Query | Enum | - | 照会するセキュリティルールが適用されるパケットの方向<br>**ingress**または**egress** |
+| direction | Query | Enum | - | 照会するセキュリティルールが適用されるパケット方向<br>**ingress**または**egress** |
 | ethertype | Query | Enum | - | 照会するセキュリティルールのネットワークトラフィック`Ethertype`値<br>**IPv4**または**IPv6** |
 | port_range_max | Query | Integer | - | 照会するセキュリティルールのポート範囲最大値 |
 | port_range_min | Query | Integer | - | 照会するセキュリティルールのポート範囲最小値 |
-| security_group_id | Query | UUID | - | 照会するセキュリティルールが属しているセキュリティグループID |
+| security_group_id | Query | UUID | - | 照会するセキュリティルールが属すセキュリティグループID |
 | tenant_id | Query | String | - | 照会するセキュリティルールのテナントID |
-| remote_ip_prefix | Query | String | - | 照会するセキュリティルールの宛先IPのプリフィックス |
+| remote_ip_prefix | Query | String | - | 照会するセキュリティルールの宛先IPアドレスプレフィックス |
 | description | Query | String | - | 照会するセキュリティルールの説明 |
 | sort_dir | Query | Enum | - | 照会するセキュリティルールのソート方向<br>`sort_key`で指定したフィールドを基準にソート<br>**asc**、**desc**のいずれか |
-| sort_key | Query | String | - | 照会するセキュリティルールのソートキー<br>`sort_dir`で指定した方向通りにソート |
+| sort_key | Query | String | - | 照会するセキュリティルールのソートキー<br>`sort_dir`で指定した方向でソート |
 | fields | Query | String | - | 照会するセキュリティルールのフィールド名<br>例) `fields=id&fields=name` |
 
 #### レスポンス
@@ -450,15 +450,15 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
 | security_group_rules | Body | Array | セキュリティルールオブジェクトリスト |
-| security_group_rules.direction | Body | Enum | セキュリティルールが適用されるパケットの方向<br>**ingress**または**egress** |
+| security_group_rules.direction | Body | Enum | セキュリティルールが適用されるパケット方向<br>**ingress**または**egress** |
 | security_group_rules.ethertype | Body | Enum | セキュリティルールのネットワークトラフィック`Ethertype`値<br>**IPv4**または**IPv6** |
 | security_group_rules.protocol | Body | String | セキュリティルールのプロトコル名 |
 | security_group_rules.description | Body | String | セキュリティルールの説明 |
 | security_group_rules.port_range_max | Body | Integer | セキュリティルールのポート範囲最大値 |
 | security_group_rules.port_range_min | Body | Integer | セキュリティルールのポート範囲最小値 |
 | security_group_rules.remote_group_id | Body | UUID | セキュリティルールの遠隔セキュリティグループID |
-| security_group_rules.remote_ip_prefix | Body | Enum | セキュリティルールの宛先IPのプリフィックス |
-| security_group_rules.security_group_id | Body | UUID | セキュリティルールが属しているセキュリティグループID |
+| security_group_rules.remote_ip_prefix | Body | Enum | セキュリティルールの宛先IPアドレスプレフィックス |
+| security_group_rules.security_group_id | Body | UUID | セキュリティルールが属すセキュリティグループID |
 | security_group_rules.tenant_id | Body | String | テナントID |
 | security_group_rules.id | Body | UUID | セキュリティルールID |
 
@@ -510,15 +510,15 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
 | security_group_rule | Body | Object | セキュリティルールオブジェクト |
-| security_group_rule.direction | Body | Enum | セキュリティルールが適用されるパケットの方向<br>**ingress**または**egress** |
+| security_group_rule.direction | Body | Enum | セキュリティルールが適用されるパケット方向<br>**ingress**または**egress** |
 | security_group_rule.ethertype | Body | Enum | セキュリティルールのネットワークトラフィック`Ethertype`値<br>**IPv4**または**IPv6** |
 | security_group_rule.protocol | Body | String | セキュリティルールのプロトコル名 |
 | security_group_rule.description | Body | String | セキュリティルールの説明 |
 | security_group_rule.port_range_max | Body | Integer | 照会するセキュリティルールのポート範囲最大値 |
 | security_group_rule.port_range_min | Body | Integer | 照会するセキュリティルールのポート範囲最小値 |
 | security_group_rule.remote_group_id | Body | UUID | セキュリティルールの遠隔セキュリティグループID |
-| security_group_rule.remote_ip_prefix | Body | Enum | セキュリティルールの宛先IPのプリフィックス |
-| security_group_rule.security_group_id | Body | UUID | セキュリティルールが属しているセキュリティグループID |
+| security_group_rule.remote_ip_prefix | Body | Enum | セキュリティルールの宛先IPアドレスプレフィックス |
+| security_group_rule.security_group_id | Body | UUID | セキュリティルールが属すセキュリティグループID |
 | security_group_rule.tenant_id | Body | String | テナントID |
 | security_group_rule.id | Body | UUID | セキュリティルールID |
 
@@ -548,7 +548,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### セキュリティルールを作成する
+### セキュリティルール作成
 
 新しいセキュリティグループルールを作成します。 IPv4に対するセキュリティルールのみ作成できます。
 
@@ -564,13 +564,13 @@ X-Auth-Token: {tokenId}
 | tokenId | Header | String | O | トークンID |
 | security_group_rule | Body | Object | O | セキュリティルール作成リクエストオブジェクト |
 | security_group_rule.remote_group_id | Body | UUID | - | セキュリティルールの遠隔セキュリティグループID |
-| security_group_rule.direction | Body | Enum | O | セキュリティルールが適用されるパケットの方向<br>**ingress**、**egress** |
-| security_group_rule.ethertype | Body | Enum | - | `IPv4`に指定。省略すると`IPv4`に指定 |
-| security_group_rule.protocol | Body | String | - | セキュリティルールのプロトコル名。省略するとすべてのプロトコルに適用。 |
+| security_group_rule.direction | Body | Enum | O | セキュリティルールが適用されるパケット方向<br>**ingress**、**egress** |
+| security_group_rule.ethertype | Body | Enum | - | `IPv4`に指定。省略時に`IPv4`に指定 |
+| security_group_rule.protocol | Body | String | - | セキュリティルールのプロトコル名。省略時にすべてのプロトコルに適用。 |
 | security_group_rule.port_range_max | Body | Integer | - | セキュリティルールのポート範囲最大値 |
 | security_group_rule.port_range_min | Body | Integer | - | セキュリティルールのポート範囲最小値 |
-| security_group_rule.security_group_id | Body | UUID | O | セキュリティルールが属しているセキュリティグループID |
-| security_group_rule.remote_ip_prefix | Body | Enum | - | セキュリティルールの宛先IPのプリフィックス |
+| security_group_rule.security_group_id | Body | UUID | O | セキュリティルールが属すセキュリティグループID |
+| security_group_rule.remote_ip_prefix | Body | Enum | - | セキュリティルールの宛先IPアドレスプレフィックス |
 | security_group_rule.description | Body | String | - | セキュリティルールの説明 |
 
 <details><summary>例</summary>
@@ -598,15 +598,15 @@ X-Auth-Token: {tokenId}
 | 名前 | 種類 | 形式 | 説明 |
 |---|---|---|---|
 | security_group_rule | Body | Object | セキュリティルールオブジェクト |
-| security_group_rule.direction | Body | Enum | セキュリティルールが適用されるパケットの方向<br>**ingress**または**egress** |
+| security_group_rule.direction | Body | Enum | セキュリティルールが適用されるパケット方向<br>**ingress**または**egress** |
 | security_group_rule.ethertype | Body | Enum | セキュリティルールのネットワークトラフィック`Ethertype`値<br>**IPv4**または**IPv6** |
 | security_group_rule.protocol | Body | String | セキュリティルールのプロトコル名 |
 | security_group_rule.description | Body | String | セキュリティルールの説明 |
 | security_group_rule.port_range_max | Body | Integer | 照会するセキュリティルールのポート範囲最大値 |
 | security_group_rule.port_range_min | Body | Integer | 照会するセキュリティルールのポート範囲最小値 |
 | security_group_rule.remote_group_id | Body | UUID | セキュリティルールの遠隔セキュリティグループID |
-| security_group_rule.remote_ip_prefix | Body | Enum | セキュリティルールの宛先IPのプリフィックス |
-| security_group_rule.security_group_id | Body | UUID | セキュリティルールが属しているセキュリティグループID |
+| security_group_rule.remote_ip_prefix | Body | Enum | セキュリティルールの宛先IPアドレスプレフィックス |
+| security_group_rule.security_group_id | Body | UUID | セキュリティルールが属すセキュリティグループID |
 | security_group_rule.tenant_id | Body | String | テナントID |
 | security_group_rule.id | Body | UUID | セキュリティルールID |
 
@@ -636,7 +636,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### セキュリティルールを削除する
+### セキュリティルール削除
 指定したセキュリティルールを削除します。
 ```
 DELETE /v2.0/security-group-rules/{securityGroupRuleId}
