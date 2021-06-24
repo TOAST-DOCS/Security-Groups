@@ -8,7 +8,7 @@ The security group controls the ingress and egress traffic of the instance and u
   * It is identically applied for both the external access using the floating IP and the internal access using the private IP. 
 * The security group operates as 'stateful', so the session which was once connected with the policy will be allowed even if it does not have any policy in the opposite direction. 
   * For example, the first packet of instance-bound TCP 80 has passed the 'Ingress TCP PORT 80' policy, the packet being sent by making the TCP 80 port as the starting point will not be blocked. 
-  * But if the session expires because the packet which satisfies the rules for a certain period of time does not come in, the packet in the opposite direction is blocked as well. 
+  * But if the session expires because the packet which satisfies the policies for a certain period of time does not come in, the packet in the opposite direction is blocked as well. 
 * In the default security group, the policy for all outgoing traffic has been set. If you do not delete this policy, all sessions that start from the instance will be allowed.
 * In the instance, many security groups can be set.
 * It is more efficient to set the range rather than adding a policy one by one. If the number of polices increases, it may lead to performance degradation.
