@@ -1,17 +1,17 @@
 ## Network > Security Groups > Overview
 
-The security group controls the ingress and egress traffic of the instance and use them to protect the instance. It allows traffic specified under the policy, and uses '(positive security model)' to block the rest of the traffic.
+A security group is used to control the incoming and outgoing traffic of an instance to protect the instance. It uses a 'positive security model', where traffic specified by the rule is allowed and the rest of the traffic is blocked.
 
 ### Key Features
-* A default security group is created when the service begins for the first time to block all ingress traffic. 
-  * Therefore, services such as 'ping' and 'ssh' cannot be used unless necessary policies are set. 
-  * It is identically applied for both the external access using the floating IP and the internal access using the private IP. 
-* The security group operates as 'stateful', so the session which was once connected with the policy will be allowed even if it does not have any policy in the opposite direction. 
-  * For example, the first packet of instance-bound TCP 80 has passed the 'Ingress TCP PORT 80' policy, the packet being sent by making the TCP 80 port as the starting point will not be blocked. 
-  * But if the session expires because the packet which satisfies the policies for a certain period of time does not come in, the packet in the opposite direction is blocked as well.
-* In the default security group, the policy for all outgoing traffic has been set. If you do not delete this policy, all sessions that start from the instance will be allowed.
-* In the instance, many security groups can be set.
-* It is more efficient to set the range rather than adding a policy one by one. If the number of polices increases, it may lead to performance degradation.
-* Sessions with invalid state can be blocked.
-* Policies not in the IP protocol list can be defined and used. [Well-known port](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
+- When you start a service for the first time, a default security group is created and all incoming traffic is blocked.
+  - Therefore, services such as 'ping' and 'ssh' cannot be used until necessary rules are set.
+  - The same applies to both of external access using a floating IP and internal access using a private IP.
+- The security group operates in a 'stateful' manner, so the session connected with the rule once will be allowed even if it does not have a rule for the opposite direction.
+  - For example, if the first packet of the TCP 80 port destined for an instance was passed according to 'Ingress TCP PORT 80' rule, the packet sent with the TCP 80 port set as the source will not be blocked.
+  - But if the session expires because the packet satisfying the rules does not come in for a certain period of time, the packet in the opposite direction is blocked as well.
+- In the default security group, the rules for all outgoing traffic have been set. If you do not delete this rule, all sessions that start from the instance will be allowed.
+- In the instance, multiple security groups can be set.
+- It is more efficient to set the range rather than to add a rule one by one. If the number of rules increases, it may lead to performance degradation.
+- Traffic with an inconsistent session state can be blocked.
+- You can define and use rules that are not in the IP protocol list. See [Well-known ports](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers).
 
