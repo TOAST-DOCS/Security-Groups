@@ -667,14 +667,14 @@ X-Auth-Token: {tokenId}
 #### 요청
 이 API는 요청 본문을 요구하지 않습니다.
 
-| 이름 | 종류 | 형식 | 필수 | 설명 |
-|---|---|---|----|---|
-| tokenId | Header | String | O  | 토큰 ID |
-| security_group_id | Query | UUID | O  | 조회할 보안 그룹 ID |
-| tenant_id | Query | String | -  | 조회할 보안 그룹의 테넌트 ID |
+| 이름 | 종류 | 형식 | 필수 | 설명                                                                         |
+|---|---|---|----|----------------------------------------------------------------------------|
+| tokenId | Header | String | O  | 토큰 ID                                                                      |
+| security_group_id | Query | UUID | O  | 조회할 보안 그룹 ID                                                               |
+| tenant_id | Query | String | -  | 조회할 보안 그룹의 테넌트 ID                                                          |
 | sort_dir | Query | Enum | -  | 조회할 보안 그룹의 정렬 방향<br>`sort_key`에서 지정한 필드를 기준으로 정렬<br>**asc**, **desc** 중 하나 |
-| sort_key | Query | String | -  | 조회할 보안 그룹의 정렬 키<br>`sort_dir`에서 지정한 방향대로 정렬 |
-| fields | Query | String | -  | 조회할 보안 그룹의 필드 이름<br>예) `fields=id&fields=name` |
+| sort_key | Query | String | -  | 조회할 보안 그룹의 정렬 키<br>`sort_dir`에서 지정한 방향대로 정렬                                |
+| fields | Query | String | -  | 조회할 보안 그룹의 필드 이름<br>예: `fields=id&fields=name`                             |
 
 #### 응답
 
