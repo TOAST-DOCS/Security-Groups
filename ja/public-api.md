@@ -656,12 +656,15 @@ X-Auth-Token: {tokenId}
 
 ---
 
+
 ## 接続情報
 ### 接続情報リスト表示
+
 ```
 GET /v2.0/security-group-ports
 X-Auth-Token: {tokenId}
 ```
+
 
 #### リクエスト
 このAPIはリクエスト本文を要求しません。
@@ -695,6 +698,7 @@ X-Auth-Token: {tokenId}
 
 
 <details><summary>例</summary>
+
 <p>
 
 ```json

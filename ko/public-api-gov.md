@@ -654,3 +654,79 @@ X-Auth-Token: {tokenId}
 
 #### 응답
 이 API는 응답 본문을 반환하지 않습니다.
+
+---
+
+## 연결 정보
+### 연결 정보 목록 보기
+```
+GET /v2.0/security-group-ports
+X-Auth-Token: {tokenId}
+```
+
+#### 요청
+이 API는 요청 본문을 요구하지 않습니다.
+
+| 이름 | 종류 | 형식 | 필수 | 설명                                                                         |
+|---|---|---|----|----------------------------------------------------------------------------|
+| tokenId | Header | String | O  | 토큰 ID                                                                      |
+| security_group_id | Query | UUID | O  | 조회할 보안 그룹 ID                                                               |
+| tenant_id | Query | String | -  | 조회할 보안 그룹의 테넌트 ID                                                          |
+| sort_dir | Query | Enum | -  | 조회할 보안 그룹의 정렬 방향<br>`sort_key`에서 지정한 필드를 기준으로 정렬<br>**asc**, **desc** 중 하나 |
+| sort_key | Query | String | -  | 조회할 보안 그룹의 정렬 키<br>`sort_dir`에서 지정한 방향대로 정렬                                |
+| fields | Query | String | -  | 조회할 보안 그룹의 필드 이름<br>예: `fields=id&fields=name`                             |
+
+#### 응답
+
+| 이름                                   | 종류 | 형식 | 설명                                          |
+|--------------------------------------|---|---|---------------------------------------------|
+| security_group_ports                 | Body | Array | 연결 포트 정보 객체 목록                              |
+| security_group_ports.id              | Body | UUID | 연결 포트의 ID                                   |
+| security_group_ports.name            | Body | String | 연결 포트 이름                                    |
+| security_group_ports.status          | Body | Enum | 연결 포트 상태<br>`ACTIVE`, `BUILD`, `DOWN` 중 하나. |
+| security_group_ports.admin_state_up  | Body | Boolean | 연결 포트의 관리자 제어 상태                            |
+| security_group_ports.network_id      | Body | UUID | 연결 포트의 네트워크 ID                              |
+| security_group_ports.tenant_id       | Body | String | 연결 포트의 테넌트 ID                               |
+| security_group_ports.project_id      | Body | String | 연결 포트의 프로젝트 ID. 테넌트 ID와 동일.                 |
+| security_group_ports.device_owner    | Body | String | 연결 포트를 사용하는 리소스 종류                          |
+| security_group_ports.device_id       | Body | UUID | 연결 포트를 사용하는 리소스 ID                          |
+| security_group_ports.mac_address     | Body | String | 연결 포트의 MAC 주소                               |
+| security_group_ports.fixed_ips       | Body | Array | 연결 포트의 고정 IP 목록                             |
+| security_group_ports.security_groups | Body | Array | 연결 포트에 설정된 보안 그룹 ID 목록                      |
+
+
+<details><summary>예시</summary>
+<p>
+
+```json
+{
+  "security_group_ports": [
+    {
+      "status": "ACTIVE",
+      "name": "",
+      "admin_state_up": true,
+      "network_id": "1031cd94-425a-4d23-9833-d7f19de30c1e",
+      "tenant_id": "76841f7d054a40b88b2a99828280998c",
+      "device_owner": "compute:kr-pub-a",
+      "mac_address": "fa:16:3e:08:3f:e9",
+      "project_id": "71843f7d054a20b88b2a97628270998c",
+      "fixed_ips": [
+        {
+          "subnet_id": "f70ae850-3f8a-4fab-9b57-926871bd2c27",
+          "ip_address": "192.168.10.91"
+        }
+      ],
+      "id": "54ad4dfb-8fcb-413c-ad9c-dc381d1a93e2",
+      "security_groups": [
+        "22156aef-48c8-4ecd-9b29-83f28cad3bcb",
+        "564e8224-7d50-4865-b044-4fbb89c5e911"
+      ],
+      "device_id": "418ce9ea-752e-4f4e-9c72-5a32479ee85a"
+    }
+  ]
+}
+
+```
+
+</p>
+</details>
