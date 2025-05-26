@@ -653,3 +653,83 @@ X-Auth-Token: {tokenId}
 
 #### レスポンス
 このAPIはレスポンス本文を返しません。
+
+---
+
+
+## 接続情報
+### 接続情報リスト表示
+
+```
+GET /v2.0/security-group-ports
+X-Auth-Token: {tokenId}
+```
+
+
+#### リクエスト
+このAPIはリクエスト本文を要求しません。
+
+| 名前 | 種類 | 形式 | 必須 | 説明                                                                       |
+|---|---|---|----|----------------------------------------------------------------------------|
+| tokenId | Header | String | O  | トークンID                                                                      |
+| security_group_id | Query | UUID | O  | 照会するセキュリティグループID                                                               |
+| tenant_id | Query | String | -  | 照会するセキュリティグループのテナントID                                                          |
+| sort_dir | Query | Enum | -  | 照会するセキュリティグループのソート方向<br>`sort_key`で指定したフィールドを基準にソート<br>**asc**, **desc**のいずれか |
+| sort_key | Query | String | -  | 照会するセキュリティグループのソートキー<br>`sort_dir`で指定した方向でソート                              |
+| fields | Query | String | -  | 照会するセキュリティグループのフィールド名<br>例：`fields=id&fields=name`                             |
+
+#### レスポンス
+
+| 名前                                 | 種類 | 形式 | 説明                                        |
+|--------------------------------------|---|---|---------------------------------------------|
+| security_group_ports                 | Body | Array | 接続ポート情報オブジェクトリスト                            |
+| security_group_ports.id              | Body | UUID | 接続ポートのID                                   |
+| security_group_ports.name            | Body | String | 接続ポート名                                  |
+| security_group_ports.status          | Body | Enum | 接続ポートの状態<br>`ACTIVE`, `BUILD`, `DOWN`のいずれか |
+| security_group_ports.admin_state_up  | Body | Boolean | 接続ポートの管理者制御状態                          |
+| security_group_ports.network_id      | Body | UUID | 接続ポートのネットワークID                              |
+| security_group_ports.tenant_id       | Body | String | 接続ポートのテナントID                               |
+| security_group_ports.project_id      | Body | String | 接続ポートのプロジェクトID。テナントIDと同じ。                 |
+| security_group_ports.device_owner    | Body | String | 接続ポートを使用するリソースの種類                        |
+| security_group_ports.device_id       | Body | UUID | 接続ポートを使用するリソースID                          |
+| security_group_ports.mac_address     | Body | String | 接続ポートのMACアドレス                             |
+| security_group_ports.fixed_ips       | Body | Array | 接続ポートの固定IPリスト                           |
+| security_group_ports.security_groups | Body | Array | 接続ポートに設定されたセキュリティグループIDリスト                    |
+
+
+<details><summary>例</summary>
+
+<p>
+
+```json
+{
+  "security_group_ports": [
+    {
+      "status": "ACTIVE",
+      "name": "",
+      "admin_state_up": true,
+      "network_id": "1031cd94-425a-4d23-9833-d7f19de30c1e",
+      "tenant_id": "76841f7d054a40b88b2a99828280998c",
+      "device_owner": "compute:kr-pub-a",
+      "mac_address": "fa:16:3e:08:3f:e9",
+      "project_id": "71843f7d054a20b88b2a97628270998c",
+      "fixed_ips": [
+        {
+          "subnet_id": "f70ae850-3f8a-4fab-9b57-926871bd2c27",
+          "ip_address": "192.168.10.91"
+        }
+      ],
+      "id": "54ad4dfb-8fcb-413c-ad9c-dc381d1a93e2",
+      "security_groups": [
+        "22156aef-48c8-4ecd-9b29-83f28cad3bcb",
+        "564e8224-7d50-4865-b044-4fbb89c5e911"
+      ],
+      "device_id": "418ce9ea-752e-4f4e-9c72-5a32479ee85a"
+    }
+  ]
+}
+
+```
+
+</p>
+</details>
