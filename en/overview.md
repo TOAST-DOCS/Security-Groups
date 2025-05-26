@@ -13,5 +13,5 @@ A security group is used to control the incoming and outgoing traffic of an inst
 * In the instance, multiple security groups can be set.
 * It is more efficient to set the range rather than to add a rule one by one. If the number of rules increases, it may lead to performance degradation.
 * Traffic with an inconsistent session state can be blocked.
-* You can define and use rules that are not in the IP protocol list. See [Well-known ports](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers).
+* You can define and use rules that are not in the IP protocol list. 
 
