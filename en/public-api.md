@@ -656,45 +656,45 @@ This API does not return a response body.
 
 ---
 
-## 연결 정보
-### 연결 정보 목록 보기
+## Connection information
+### View the list of the connection information
 ```
 GET /v2.0/security-group-ports
 X-Auth-Token: {tokenId}
 ```
 
-#### 요청
-이 API는 요청 본문을 요구하지 않습니다.
+#### Request
+This API does not require a request body.
 
-| 이름 | 종류 | 형식 | 필수 | 설명                                                                         |
+| Name | Type | Format | Required | Description                                                                         |
 |---|---|---|----|----------------------------------------------------------------------------|
-| tokenId | Header | String | O  | 토큰 ID                                                                      |
-| security_group_id | Query | UUID | O  | 조회할 보안 그룹 ID                                                               |
-| tenant_id | Query | String | -  | 조회할 보안 그룹의 테넌트 ID                                                          |
-| sort_dir | Query | Enum | -  | 조회할 보안 그룹의 정렬 방향<br>`sort_key`에서 지정한 필드를 기준으로 정렬<br>**asc**, **desc** 중 하나 |
-| sort_key | Query | String | -  | 조회할 보안 그룹의 정렬 키<br>`sort_dir`에서 지정한 방향대로 정렬                                |
-| fields | Query | String | -  | 조회할 보안 그룹의 필드 이름<br>예: `fields=id&fields=name`                             |
+| tokenId | Header | String | O  | Token ID                                                                      |
+| security_group_id | Query | UUID | O  | Security group ID to query                                                               |
+| tenant_id | Query | String | -  | Tenant ID of security group to query                                                          |
+| sort_dir | Query | Enum | -  | Sorting direction of security group to query<br>Sort by the field specified in `sort_key`<br>One of **asc** and **desc** |
+| sort_key | Query | String | -  | Sorting key of security group to query<br>Sort by the direction specified in `sort_dir`                                |
+| fields | Query | String | -  | Field name of security group to query<br>Example: `fields=id&fields=name`                             |
 
-#### 응답
+#### Response
 
-| 이름                                   | 종류 | 형식 | 설명                                          |
+| Name                                   | Type | Format | Description                                          |
 |--------------------------------------|---|---|---------------------------------------------|
-| security_group_ports                 | Body | Array | 연결 포트 정보 객체 목록                              |
-| security_group_ports.id              | Body | UUID | 연결 포트의 ID                                   |
-| security_group_ports.name            | Body | String | 연결 포트 이름                                    |
-| security_group_ports.status          | Body | Enum | 연결 포트 상태<br>`ACTIVE`, `BUILD`, `DOWN` 중 하나. |
-| security_group_ports.admin_state_up  | Body | Boolean | 연결 포트의 관리자 제어 상태                            |
-| security_group_ports.network_id      | Body | UUID | 연결 포트의 네트워크 ID                              |
-| security_group_ports.tenant_id       | Body | String | 연결 포트의 테넌트 ID                               |
-| security_group_ports.project_id      | Body | String | 연결 포트의 프로젝트 ID. 테넌트 ID와 동일.                 |
-| security_group_ports.device_owner    | Body | String | 연결 포트를 사용하는 리소스 종류                          |
-| security_group_ports.device_id       | Body | UUID | 연결 포트를 사용하는 리소스 ID                          |
-| security_group_ports.mac_address     | Body | String | 연결 포트의 MAC 주소                               |
-| security_group_ports.fixed_ips       | Body | Array | 연결 포트의 고정 IP 목록                             |
-| security_group_ports.security_groups | Body | Array | 연결 포트에 설정된 보안 그룹 ID 목록                      |
+| security_group_ports                 | Body | Array | List of connection port information objects                             |
+| security_group_ports.id              | Body | UUID | ID of connection port                                   |
+| security_group_ports.name            | Body | String | Connection port name                                    |
+| security_group_ports.status          | Body | Enum | Connection port status<br>Among `ACTIVE`, `BUILD`, and `DOWN`. |
+| security_group_ports.admin_state_up  | Body | Boolean | Admin control status of port                            |
+| security_group_ports.network_id      | Body | UUID |  Network ID of connection port                              |
+| security_group_ports.tenant_id       | Body | String | Tenant ID of connection port                               |
+| security_group_ports.project_id      | Body | String | Project ID of connection port. Same as tenant ID.                 |
+| security_group_ports.device_owner    | Body | String | Resource type ussing connection port                          |
+| security_group_ports.device_id       | Body | UUID | Resource ID using connection port                          |
+| security_group_ports.mac_address     | Body | String | MAC address of connection port                               |
+| security_group_ports.fixed_ips       | Body | Array | Static IP list of connection ports                             |
+| security_group_ports.security_groups | Body | Array | Security group ID list configured on connection port                      |
 
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
 
 ```json
