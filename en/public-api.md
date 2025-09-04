@@ -654,3 +654,79 @@ This API does not require a request body.
 #### Response
 This API does not return a response body.
 
+---
+
+## Connection information
+### View the list of the connection information
+```
+GET /v2.0/security-group-ports
+X-Auth-Token: {tokenId}
+```
+
+#### Request
+This API does not require a request body.
+
+| Name | Type | Format | Required | Description                                                                         |
+|---|---|---|----|----------------------------------------------------------------------------|
+| tokenId | Header | String | O  | Token ID                                                                      |
+| security_group_id | Query | UUID | O  | Security group ID to query                                                               |
+| tenant_id | Query | String | -  | Tenant ID of security group to query                                                          |
+| sort_dir | Query | Enum | -  | Sorting direction of security group to query<br>Sort by the field specified in `sort_key`<br>One of **asc** and **desc** |
+| sort_key | Query | String | -  | Sorting key of security group to query<br>Sort by the direction specified in `sort_dir`                                |
+| fields | Query | String | -  | Field name of security group to query<br>Example: `fields=id&fields=name`                             |
+
+#### Response
+
+| Name                                   | Type | Format | Description                                          |
+|--------------------------------------|---|---|---------------------------------------------|
+| security_group_ports                 | Body | Array | List of connection port information objects                             |
+| security_group_ports.id              | Body | UUID | ID of connection port                                   |
+| security_group_ports.name            | Body | String | Connection port name                                    |
+| security_group_ports.status          | Body | Enum | Connection port status<br>Among `ACTIVE`, `BUILD`, and `DOWN`. |
+| security_group_ports.admin_state_up  | Body | Boolean | Admin control status of port                            |
+| security_group_ports.network_id      | Body | UUID |  Network ID of connection port                              |
+| security_group_ports.tenant_id       | Body | String | Tenant ID of connection port                               |
+| security_group_ports.project_id      | Body | String | Project ID of connection port. Same as tenant ID.                 |
+| security_group_ports.device_owner    | Body | String | Resource type ussing connection port                          |
+| security_group_ports.device_id       | Body | UUID | Resource ID using connection port                          |
+| security_group_ports.mac_address     | Body | String | MAC address of connection port                               |
+| security_group_ports.fixed_ips       | Body | Array | Static IP list of connection ports                             |
+| security_group_ports.security_groups | Body | Array | Security group ID list configured on connection port                      |
+
+
+<details><summary>Example</summary>
+<p>
+
+```json
+{
+  "security_group_ports": [
+    {
+      "status": "ACTIVE",
+      "name": "",
+      "admin_state_up": true,
+      "network_id": "1031cd94-425a-4d23-9833-d7f19de30c1e",
+      "tenant_id": "76841f7d054a40b88b2a99828280998c",
+      "device_owner": "compute:kr-pub-a",
+      "mac_address": "fa:16:3e:08:3f:e9",
+      "project_id": "71843f7d054a20b88b2a97628270998c",
+      "fixed_ips": [
+        {
+          "subnet_id": "f70ae850-3f8a-4fab-9b57-926871bd2c27",
+          "ip_address": "192.168.10.91"
+        }
+      ],
+      "id": "54ad4dfb-8fcb-413c-ad9c-dc381d1a93e2",
+      "security_groups": [
+        "22156aef-48c8-4ecd-9b29-83f28cad3bcb",
+        "564e8224-7d50-4865-b044-4fbb89c5e911"
+      ],
+      "device_id": "418ce9ea-752e-4f4e-9c72-5a32479ee85a"
+    }
+  ]
+}
+
+```
+
+</p>
+</details>
+
