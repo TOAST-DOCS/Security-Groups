@@ -4,9 +4,9 @@ Using the API requires API endpoint, token, etc. Please refer to [Getting ready 
 
 Security Group API uses the `network` type endpoint. To see the accurate endpoint, refer to `serviceCatalog` of the token issuance response.
 
-| Type | Region | Endpoint |
-|---|---|---|
-| network | Korea(Pangyo) Region<br>Korea(Pyeongchon) Region<br>Japan(Tokyo) Region<br>USA(California) Region | https://kr1-api-network-infrastructure.nhncloudservice.com<br>https://kr2-api-network-infrastructure.nhncloudservice.com<br>https://jp1-api-network-infrastructure.nhncloudservice.com<br>https://us1-api-network-infrastructure.nhncloudservice.com |
+| Type | Region                                                                      | Endpoint                                                                                                                                                                                                                                                                                                           |
+|---|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| network | Korea(Pangyo) Region<br>Korea(Pyeongchon) Region<br>Korea (Gwangju) Region<br>Japan(Tokyo) Region | https://kr1-api-network-infrastructure.nhncloudservice.com<br>https://kr2-api-network-infrastructure.nhncloudservice.com<br>https://kr3-api-network-infrastructure.nhncloudservice.com<br>https://jp1-api-network-infrastructure.nhncloudservice.com|
 
 API response may show the fields not specified by the guide. These fields are internally used by NHN Cloud, and not used because they are subject to change without prior notice.
 
