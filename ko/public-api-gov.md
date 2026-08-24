@@ -1,4 +1,4 @@
-## Network > Security Groups > API v2 가이드
+## Network > Security Groups > API v2 가이드 { #network-security-groups-api-v2-guide }
 
 NHN Cloud Network 서비스는 API 호출 시 인증/인가를 위해 IaaS 토큰을 사용합니다. IaaS 토큰은 NHN Cloud의 OpenStack 기반 인프라 서비스(IaaS)에서 사용하는 인증 토큰입니다. IaaS 토큰 발급 및 사용에 대한 자세한 내용은 [IaaS 토큰](/nhncloud/ko/public-api/iaas-token-gov)을 참고하세요.
 
@@ -12,8 +12,8 @@ NHN Cloud Network 서비스는 API 호출 시 인증/인가를 위해 IaaS 토�
 API 응답에 가이드에 명시되지 않은 필드가 나타날 수 있습니다. 이런 필드는 NHN Cloud 내부 용도로 사용되며 사전 공지 없이 변경될 수 있으므로 사용하지 않습니다.
 
 
-## 보안 그룹
-### 보안 그룹 목록 보기
+## 보안 그룹 { #security-group }
+### 보안 그룹 목록 보기 { #see-the-list-of-security-groups }
 ```
 GET /v2.0/security-groups
 X-Auth-Token: {tokenId}
@@ -118,7 +118,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 그룹 보기
+### 보안 그룹 보기 { #see-the-security-groups }
 ```
 GET /v2.0/security-groups/{securityGroupId}
 X-Auth-Token: {tokenId}
@@ -217,7 +217,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 그룹 생성하기
+### 보안 그룹 생성하기 { #creating-a-security-group }
 
 새로운 보안 그룹을 생성합니다. 새로 생성된 보안 그룹은 나가는 방향의 보안 그룹 규칙을 기본적으로 포함합니다.
 
@@ -308,7 +308,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 그룹 수정하기
+### 보안 그룹 수정하기 { #modifying-a-security-group }
 기존 보안 그룹을 수정합니다.
 ```
 PUT /v2.0/security-groups/{securityGroupId}
@@ -398,7 +398,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 그룹 삭제하기
+### 보안 그룹 삭제하기 { #deleting-a-security-group }
 지정한 보안 그룹을 삭제합니다.
 ```
 DELETE /v2.0/security-groups/{securityGroupId}
@@ -418,8 +418,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-## 보안 규칙
-### 보안 규칙 목록 보기
+## 보안 규칙 { #security-rules }
+### 보안 규칙 목록 보기 { #see-the-list-of-security-rules }
 ```
 GET /v2.0/security-group-rules
 X-Auth-Token: {tokenId}
@@ -491,7 +491,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 규칙 보기
+### 보안 규칙 보기 { #see-the-security-rules }
 ```
 GET /v2.0/security-group-rules/{securityGroupRuleId}
 X-Auth-Token: {tokenId}
@@ -549,7 +549,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 규칙 생성하기
+### 보안 규칙 생성하기 { #creating-a-security-rule }
 
 새로운 보안 그룹 규칙을 생성합니다. IPv4에 대한 보안 규칙만 생성할 수 있습니다.
 
@@ -637,7 +637,7 @@ X-Auth-Token: {tokenId}
 
 ---
 
-### 보안 규칙 삭제하기
+### 보안 규칙 삭제하기 { #deleting-a-security-rule }
 지정한 보안 규칙을 삭제합니다.
 ```
 DELETE /v2.0/security-group-rules/{securityGroupRuleId}
@@ -657,8 +657,8 @@ X-Auth-Token: {tokenId}
 
 ---
 
-## 연결 정보
-### 연결 정보 목록 보기
+## 연결 정보 { #connection-information }
+### 연결 정보 목록 보기 { #view-the-list-of-the-connection-information }
 ```
 GET /v2.0/security-group-ports
 X-Auth-Token: {tokenId}
