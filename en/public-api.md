@@ -339,7 +339,7 @@ X-Auth-Token: {tokenId}
 | description | Body | String | - | Security group description |
 | name | Body | String | - | Security group name |
 
-<details><summary>예시</summary>
+<details><summary>Example</summary>
 <p>
 
 ```json
